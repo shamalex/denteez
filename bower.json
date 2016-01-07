@@ -1,0 +1,21 @@
+{
+  "name": "denteez",
+  "homepage": "https://github.com/shamalex/denteez",
+  "authors": [
+    "Shamshin alex <shamshin@i.ua>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
