@@ -1,0 +1,103 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+@import "compass";
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/layout";
+@import "compass/typography";
+@import "compass/utilities";
+
+/* font-family: "proximanova-regular"; */
+@font-face {
+    font-family: "proximanova-regular";
+    src: url("../fonts/proximanova-regular.eot");
+    src: url("../fonts/proximanova-regular.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/proximanova-regular.woff") format("woff"),
+    url("../fonts/proximanova-regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+	display: block;
+}
+
+/*Changes colors
+--------------------------------------------------------------------------*/
+
+$menu-color: #59606B;
+$body-color: #1C2534;
+$body-color-hover: #71973C;
+$user-color: #7C8695;
+#footer-color: #B7BFCD
+$font: "proximanova-regular";
+
+body {
+	font: 12px/18px $font;
+	color:$body-color;
+}
+.wrapper {
+	min-width: 970px;
+	max-width: 1440px;
+	margin: 0 auto;
+}
+
+
+/* Header
+-----------------------------------------------------------------------------*/
+.header {
+	height: 68px;
+	background: #FFE680;
+}
+
+/* Middle
+-----------------------------------------------------------------------------*/
+.middle {
+	width: 100%;
+	position: relative;
+}
+.middle:after {
+	display: table;
+	clear: both;
+	content: '';
+}
+.container {
+	width: 100%;
+	float: left;
+	overflow: hidden;
+}
+.content {
+	padding: 0 233px 0 232px;
+}
+
+
+/* Left Sidebar
+-----------------------------------------------------------------------------*/
+.left-sidebar {
+	float: left;
+	width: 212px;
+	margin-left: -100%;
+	position: relative;
+	background: #B5E3FF;
+}
+
+
+/* Right Sidebar
+-----------------------------------------------------------------------------*/
+.right-sidebar {
+	float: left;
+	width: 213px;
+	margin-left: -213px;
+	position: relative;
+	background: #FFACAA;
+}
+
+
+/* Footer
+-----------------------------------------------------------------------------*/
+.footer {
+	height: 100px;
+	background: #BFF08E;
+}
