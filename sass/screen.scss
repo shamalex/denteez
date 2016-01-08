@@ -49,6 +49,20 @@ $f30: 30px;
 	border-radius: $radius;
 }
 
+@mixin transition($transition) {
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+	-o-transition: $transition;
+	transition: $transition;
+}
+
+@mixin box-shadow($shadow) {
+	-moz-box-shadow: $shadow;
+	-o-transition: $shadow;
+	-webkit-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
 body {
 	font: 12px/18px $font;
 	color:$body-color;
@@ -73,7 +87,6 @@ body {
 		vertical-align: middle;
 	}
 }
-
 
 /* Header
 -----------------------------------------------------------------------------*/
@@ -235,7 +248,7 @@ body {
 }
 .content {
 
-	padding: 0 233px 0 232px;
+	padding: 0 233px 50px 232px;
 
 	h2 {
 		font-size: $f30;
@@ -255,18 +268,86 @@ body {
 		margin: 12px 21px 0 0;
 		@include border-radius(5px);
 		text-decoration: none;
-		transition: all 0.2s ease-in-out;
+		@include transition(all 0.2s ease-in-out);
 	}
 	a.button-green:hover {
 		background-color: #57821C;
 	}
+
+	a.service-name-link {
+		color: $body-color;
+		font-size: $f14;
+		display: inline-block;
+		margin: 12.5px 0px;
+		max-width: 120px;
+		word-wrap: break-word;
+		letter-spacing: 1px;
+	}
 }
 .services-wrap {
 	@include border-radius(5px);
+	border: 1px solid #E0E2E6;
+	padding: 15px;
+	margin-top: 20px;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: space-around;
+	justify-content: space-around;
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	-webkit-box-align: flex-start;
+	-webkit-flex-align: flex-start;
+	-ms-flex-align: flex-start;
+	-webkit-align-items: flex-start;
+	-webkit-align-content: center;
+	align-content: center;
+	text-align: center;
+	@include transition(all 0.2s ease-in-out);
+
+	.service-item-inner {
+		width: 138px;
+		height: 138px;
+		border: 1px solid #E0E2E6;
+		vertical-align: middle;
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		justify-content: center;
+		-webkit-flex-wrap: wrap;
+		-moz-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		-o-flex-wrap: wrap;
+		flex-wrap: wrap;
+		align-items: center;
+		-webkit-box-align: center;
+		-webkit-flex-align: center;
+		-ms-flex-align: center;
+		-webkit-align-items: center;
+		-webkit-align-content: center;
+		align-content: center;
+		text-align: center;
+		@include transition(all 0.2s ease-in-out);
+	}
+	.service-item-inner:hover {
+		background-color: #F4F7FB;
+	}
+	.service-item:hover a.service-name-link {
+		color: #71973C;
+	}
 }
-.service-name-link a {
-	color: $body-color;
-}
+
 .services-wrap:hover {
 	color: $body-color-hover;
 }
@@ -363,12 +444,10 @@ body {
 			width: 80px;
 			height: 80px;
 			@include border-radius(5px);
-			transition: all 0.2s ease-in-out;
+			@include transition(all 0.2s ease-in-out);
 		}
 		.company-img img:hover {
-			-moz-box-shadow: 0 0 10px #B1B1B1;
-			-webkit-box-shadow: 0 0 10px #B1B1B1;
-			box-shadow: 0 0 10px #B1B1B1;
+			@include box-shadow(0 0 10px #B1B1B1);
 		}
 	}
 
@@ -493,7 +572,7 @@ body {
 			width: 80px;
 			height: 80px;
 			@include border-radius(5px);
-			transition: all 0.2s ease-in-out;
+			@include transition(all 0.2s ease-in-out);
 		}
 		.people-may-know-img img:hover {
 			-moz-box-shadow: 0 0 10px #B1B1B1;
@@ -524,7 +603,7 @@ body {
 			width: 80px;
 			height: 80px;
 			@include border-radius(5px);
-			transition: all 0.2s ease-in-out;
+			@include transition(all 0.2s ease-in-out);
 		}
 
 		.featured-product-img img:hover {
