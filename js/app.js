@@ -1,0 +1,23 @@
+angular
+		.module('myeventsApp',[])
+		.controller('EventsController',['$scope','$http',function($scope,$http) {
+			$scope.get = $http.get('http://jsonplaceholder.typicode.com/posts').
+			success(function (data) {
+				console.log("200 - success data")
+				$scope.categories = data;
+			}).
+			//errors 
+			error(function(data, status, headers, config) {
+				$('#myModal').modal('toggle');
+				if(status == 401) {
+					$('#myModal .modal-body h3').append(status + " - Authorization error");
+				}
+				else if(status == 500){
+					$('#myModal .modal-body h3').append(status + " - Server internal error");
+				}
+				else if(status == 404){
+					$('#myModal .modal-body h3').append(status + " - Page not found");
+				}
+
+			});
+		}]);
