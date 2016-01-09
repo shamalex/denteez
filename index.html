@@ -7,9 +7,53 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link href="stylesheets/screen.css" rel="stylesheet">
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-cookie/angular-cookie.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+	<script type="text/javascript">
+
+			//errors 
+			angular
+				.module('myeventsApp',[])
+				.controller('EventsController',['$scope','$http',function($scope,$http) {
+					$scope.get = $http.get('http://jsonplaceholder.typicode.com/posts').
+					success(function (data) {
+						console.log("200 - success data")
+						$scope.categories = data;
+					});
+				}]);
+
+				(function(){
+				  var httpInterceptor = function ($provide, $httpProvider) {
+					$provide.factory('httpInterceptor', function ($q) {
+					  return {
+						responseError: function (rejection) {
+							$('#myModal').modal('toggle')
+						  if(rejection.status === 401) {
+							console.log("401 - not authorized")
+						  }
+						  if(rejection.status === 404) {
+							console.log("404 - not found data")
+						  }
+						  if(rejection.status === 500) {
+							console.log("500 - not found data")
+						  }
+						  return $q.reject(rejection);
+						}
+					  };
+					});
+					$httpProvider.interceptors.push('httpInterceptor');
+				  };
+				  angular.module("myeventsApp").config(httpInterceptor);
+				}());
+
+
+	</script>
 </head>
 
-<body>
+<body ng-app="myeventsApp">
 
 <div class="wrapper">
 
@@ -21,7 +65,7 @@
 			<!-- begin main-logo  -->
 			<div class="main-logo">
 
-				<a href="#"><img src="images/logo.png" alt="logo-denteez"></a>
+				<a href="#"><img src="images/logo.svg" alt="logo-denteez"></a>
 
 			</div>
 			<!-- end main-logo -->
@@ -31,11 +75,11 @@
 
 				<form class="navbar-form" role="search">
 
-					<div class="input-group add-on">
+					<div class="input-group-add-on">
 
 						<i class="icons icon-search"></i>
 
-						<input type="text" class="form-control" placeholder="Company Name" name="srch-term" id="srch-term">
+						<input type="text" class="form-control1" placeholder="Company Name" name="srch-term" id="srch-term">
 
 					</div>
 
@@ -92,343 +136,41 @@
 				<a href="#" class="button-green">Add New Service</a>
 
 				<!-- begin services-wrap  -->
-				<div class="services-wrap">
+				<div class="services-wrap" ng-controller="EventsController">
 					
 					<!-- begin service-item  -->
-					<div class="service-item">
+					<div class="service-item" ng-repeat="category in categories">
 						
 						<!-- begin service-item-inner  -->
 						<div class="service-item-inner">
 
-							<a href="#"><img src="images/icons/Accountancy.png"></a>
+							<a href="#"><img src="#"></a>
 							
 						</div>
 						<!-- end service-item-inner -->
 
-						<a class="service-name-link" href="#">Accountancy</a>
+						<a class="service-name-link" href="#">{{category.title}}</a>
 
 					</div>
 					<!-- end service-item -->
 
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Associations.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Associations</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Buy_Dental.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Buy/Sell Dental Practice</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Clinical _Waste_Collection.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Clinical Waste Collection</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Computer_Service.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Computer Service</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/CPRBasic_Life_Support_Training.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">CPR/Basic Life Support Training</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Dental_Recruitment.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Dental Recruitment</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Dental_Software.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Dental Software</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Electrical_Safety_Testing.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Electrical Safety And Testing</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Marketing.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Marketing</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Others.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Others</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Repairs.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Repairs</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Solicitors.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Solicitors</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Surgery_Design.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Surgery Design</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Training_Courses.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Training & Courses</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Web_Designers.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Web Designers</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Cleaning_Agencies.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Cleaning Agencies</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Dental _Chair_Recovery.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Dental Chair Recovery</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Engineering.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Equipment Engineering</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Selling_Gold.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Selling Gold</a>
-						
-					</div>
-					<!-- end service-item -->
-
-					<!-- begin service-item  -->
-					<div class="service-item">
-						
-						<!-- begin service-item-inner  -->
-						<div class="service-item-inner">
-
-							<a href="#"><img src="images/icons/Uniform_Workwear.png"></a>
-							
-						</div>
-						<!-- end service-item-inner -->
-
-						<a class="service-name-link" href="#">Uniform & Workwear</a>
-						
-					</div>
-					<!-- end service-item -->
+					<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Статус ответа от сервера</h4>
+	  </div>
+	  <div class="modal-body">
+		...
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+	  </div>
+	</div>
+  </div>
+</div>
 
 				</div>
 				<!-- end services-wrap -->
