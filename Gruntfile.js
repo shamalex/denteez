@@ -3,8 +3,6 @@ module.exports = function(grunt) {
   // Инициализация конфига GruntJS
   grunt.initConfig({
 
-    //Настройки различных модулей GruntJS, их нужно предварительно установить через менеджер пакетов npm, или добавить в файл package.json перед запуском npm install
-
     //Склеивание файлов
     concat: {
                 dist: {
@@ -19,13 +17,15 @@ module.exports = function(grunt) {
                     dest: 'js/production.js',
                 }
             },
+
+    //Минимизация файлов
     uglify: {
         build: {
             src: 'js/production.js',
             dest: 'js/production.min.js'
         }
     }
-    //И так далее
+
   });
 
   //Загрузка модулей, которые предварительно установлены

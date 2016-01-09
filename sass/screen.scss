@@ -172,6 +172,7 @@ body {
 			-webkit-align-content: center;
 			align-content: center;
 			text-align: right;
+			z-index: 1;
 
 			.user-name {
 				white-space: nowrap;
@@ -277,6 +278,7 @@ body {
 	position: relative;
 	top: 2px;
 	margin-right: 18px;
+	z-index: 99;
 }
 .user-name img {
 	width: 32px;
@@ -334,7 +336,7 @@ body {
 		color: $body-color;
 		font-size: $f14;
 		display: inline-block;
-		margin: 12.5px 0px;
+		margin: 12.5px 0 8px 0;
 		max-width: 120px;
 		word-wrap: break-word;
 		max-height: 72px;
@@ -344,7 +346,7 @@ body {
 .services-wrap {
 	@include border-radius(5px);
 	border: 1px solid #E0E2E6;
-	padding: 0 8px;
+	padding: 16px 8px;
 	margin-top: 20px;
 	display: -webkit-box;
 	display: -moz-box;
@@ -370,7 +372,7 @@ body {
 	@include transition(all 0.2s ease-in-out);
 
 	.service-item {
-		padding: 16px 8px 0 8px;
+		padding: 0px 8px 0 8px;
 	}
 	.service-item-inner {
 		width: 138px;
@@ -403,7 +405,7 @@ body {
 	.service-item-inner:hover {
 		background-color: #F4F7FB;
 	}
-	.service-item:hover a.service-name-link {
+	.service-item:hover .service-name-link {
 		color: #71973C;
 	}
 }
